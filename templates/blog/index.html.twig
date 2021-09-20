@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BlogController!{% endblock %}
+
+{% block body %}
+    <section class="articles">
+        <section>
+            <h2>Titre de l'article</h2>
+            <img src="http://placehold.it/350x150">
+            <p>
+                text text text text text text text text text text <br>
+                text text text text text text text text text text
+            </p>
+            <a href="{{ path('blog_show') }}"><button class="btn btn-primary">Lire la suite</button></a>
+        </section>
+        <section>
+            <h2>Titre de l'article</h2>
+            <img src="http://placehold.it/350x150">
+            <p>
+                text text text text text text text text text text <br>
+                text text text text text text text text text text
+            </p>
+            <a href="{{ path('blog_show') }}"><button class="btn btn-primary">Lire la suite</button></a>
+        </section>
+        <section>
+            <h2>Titre de l'article</h2>
+            <img src="http://placehold.it/350x150">
+            <p>
+                text text text text text text text text text text <br>
+                text text text text text text text text text text
+            </p>
+            <a href="{{ path('blog_show') }}"><button class="btn btn-primary">Lire la suite</button></a>
+        </section>
+
+    </section>
+{% endblock %}
