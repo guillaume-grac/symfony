@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -19,16 +20,24 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *     min = 5,
+     *     max = 255
+     *     )
      */
     private $titre;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(
+     *     min = 10
+     *     )
      */
     private $contenu;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Url()
      */
     private $image;
 

@@ -1,36 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BlogController!{% endblock %}
+{% block title %}Blog | Articles{% endblock %}
 
 {% block body %}
-    <section class="articles">
-        <section>
-            <h2>Titre de l'article</h2>
-            <img src="http://placehold.it/350x150">
-            <p>
-                text text text text text text text text text text <br>
-                text text text text text text text text text text
-            </p>
-            <a href="{{ path('blog_show') }}"><button class="btn btn-primary">Lire la suite</button></a>
-        </section>
-        <section>
-            <h2>Titre de l'article</h2>
-            <img src="http://placehold.it/350x150">
-            <p>
-                text text text text text text text text text text <br>
-                text text text text text text text text text text
-            </p>
-            <a href="{{ path('blog_show') }}"><button class="btn btn-primary">Lire la suite</button></a>
-        </section>
-        <section>
-            <h2>Titre de l'article</h2>
-            <img src="http://placehold.it/350x150">
-            <p>
-                text text text text text text text text text text <br>
-                text text text text text text text text text text
-            </p>
-            <a href="{{ path('blog_show') }}"><button class="btn btn-primary">Lire la suite</button></a>
-        </section>
 
+    <section class="articles">
+        {% for article in articles %}
+        <section>
+            <h2>{{ article.titre }}</h2>
+            <h3>Ecrit le {{ article.createdAt | date('d/m/y') }}</h3>
+            <img src="http://placehold.it/350x150">
+            <p>
+                {{article.contenu | raw }}
+            </p>
+            <a href="{{ path('blog_show', {'id': article.id}) }}"><button class="btn btn-primary">Lire la suite</button></a>
+        </section>
+        {% endfor %}
     </section>
+
 {% endblock %}

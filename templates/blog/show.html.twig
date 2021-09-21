@@ -1,20 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Blog | Article {{ article.id }}{% endblock %}
+
 {% block body %}
     <section>
-        <h2>Titre de l'article</h2>
-        <img src="http://placehold.it/350x150">
-        <p>
-            text text text text text text text text text text <br>
-            text text text text text text text text text text
-        </p>
-        <p>
-            text text text text text text text text text text <br>
-            text text text text text text text text text text
-        </p>
-        <p>
-            text text text text text text text text text text <br>
-            text text text text text text text text text text
-        </p>
+        <h2>{{ article.titre }}</h2>
+        <img src="{{ article.image }}">
+        <p>Ecrit le {{ article.createdAt | date('d/m/y')}}</p>
+        <p>{{ article.contenu | raw }}</p>
     </section>
 {% endblock %}

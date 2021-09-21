@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formArticle 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}Blog | Créer un article{% endblock %}
+
+{% block body %}
+
+    <h1>Création d'un article</h1>
+
+    {{ form_start(formArticle) }}
+
+        {{ form_row(formArticle.titre, {'attr': {'placeholder': "Titre de l\'article"}}) }}
+        {{ form_row(formArticle.contenu, {'attr': {'placeholder': "Contenu de l\'article"}}) }}
+        {{ form_row(formArticle.image, {'attr': {'placeholder': "Image de l\'article"}}) }}
+
+    <button type="submit" class="btn btn-success">
+        {% if editMode %}
+        Editer
+        {% else %}
+        Ajouter
+        {% endif %}
+    </button>
+
+    {{ form_end(formArticle) }}
+
+{% endblock %}
