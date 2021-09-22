@@ -9,7 +9,7 @@
         <section>
             <h2>{{ article.titre }}</h2>
             <h3>Ecrit le {{ article.createdAt | date('d/m/y') }}</h3>
-            <img src="http://placehold.it/350x150">
+            <img src="{{ article.image }}">
             <p>
                 {{article.contenu | raw }}
             </p>

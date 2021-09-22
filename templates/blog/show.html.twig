@@ -6,7 +6,21 @@
     <section>
         <h2>{{ article.titre }}</h2>
         <img src="{{ article.image }}">
-        <p>Ecrit le {{ article.createdAt | date('d/m/y')}}</p>
+        <p>Ecrit le {{ article.createdAt | date('d/m/y')}} dans la catégorie {{ article.category.titre }}</p>
         <p>{{ article.contenu | raw }}</p>
+    </section>
+    <section id="commentaires">
+        {% for comment in article.comments %}
+        <div id="comment">
+            <div class="row">
+                <div class="col-3">
+                    {{ comment.author }}(<small>{{ comment.createdAt | date('d/m/Y') }}</small>)
+                </div>
+                <div class="col">
+                    {{ comment.content | raw }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </section>
 {% endblock %}
