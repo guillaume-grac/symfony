@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme commentForm 'bootstrap_4_layout.html.twig' %}
+
 {% block title %}Blog | Article {{ article.id }}{% endblock %}
 
 {% block body %}
@@ -10,6 +12,7 @@
         <p>{{ article.contenu | raw }}</p>
     </section>
     <section id="commentaires">
+        <h1>{{ article.comments | length }} commentaires :</h1>
         {% for comment in article.comments %}
         <div id="comment">
             <div class="row">
@@ -22,5 +25,15 @@
             </div>
         </div>
         {% endfor %}
+
+        {% if app.user %}
+        {{ form_start(commentForm) }}
+        {{ form_row(commentForm.author, {'attr':{'placeholder':"Votre Nom"}}) }}
+        {{ form_row(commentForm.content, {'attr':{'placeholder':"Votre Commentaire"}}) }}
+        <button type="submit" class="btn btn-success">Commenter</button>
+        {{ form_end(commentForm) }}
+        {% else %}
+            <h2>Créez un compte ou connectez vous pour commenter.</h2>
+        {% endif %}
     </section>
 {% endblock %}
