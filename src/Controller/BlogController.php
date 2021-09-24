@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Category;
 use App\Entity\Comment;
 use App\Form\CommentType;
+use App\Controller\SecurityController;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -49,37 +50,46 @@ class BlogController extends AbstractController
      */
     public function form(Article $article = null, Request $request, EntityManagerInterface $manager){
 
-        if (!$article){
-            $article = new Article();
-        }
+        $user = $this->getUser();
 
-        $form = $this->createFormBuilder($article)
-            ->add('titre')
-            ->add('category', EntityType::class, [
-                'class' => Category::class,
-                'choice_label' => 'titre'
-            ])
-            ->add('contenu')
-            ->add('image')
-            ->getForm();
+        if($user->email === 'admin@admin.admin'){
 
-        $form ->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()){
-            if (!$article->getId()){
-                $article->setCreatedAt(new \DateTime());
+            if (!$article){
+                $article = new Article();
             }
 
-            $manager->persist($article);
-            $manager->flush();
+            $form = $this->createFormBuilder($article)
+                ->add('titre')
+                ->add('category', EntityType::class, [
+                    'class' => Category::class,
+                    'choice_label' => 'titre'
+                ])
+                ->add('contenu')
+                ->add('image')
+                ->getForm();
 
-            return $this->redirectToRoute('blog_show', ['id' => $article->getId()]);
+            $form ->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()){
+                if (!$article->getId()){
+                    $article->setCreatedAt(new \DateTime());
+                }
+
+                $manager->persist($article);
+                $manager->flush();
+
+                return $this->redirectToRoute('blog_show', ['id' => $article->getId()]);
+            }
+
+            return $this->render('blog/create.html.twig',[
+                'formArticle' => $form->createView(),
+                'editMode' => $article->getId() !== null,
+            ]);
+        }
+        else{
+            return $this->redirectToRoute('blog');
         }
 
-        return $this->render('blog/create.html.twig',[
-            'formArticle' => $form->createView(),
-            'editMode' => $article->getId() !== null
-        ]);
     }
 
     /**

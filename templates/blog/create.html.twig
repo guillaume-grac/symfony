@@ -5,24 +5,32 @@
 {% block title %}Blog | Créer un article{% endblock %}
 
 {% block body %}
+    {% if app.user ? app.user.email %}
+        {% if app.user.email is same as('admin@admin.admin') %}
 
-    <h1>Création d'un article</h1>
+            <h1>Création d'un article</h1>
 
-    {{ form_start(formArticle) }}
 
-        {{ form_row(formArticle.titre, {'attr': {'placeholder': "Titre de l\'article"}}) }}
-        {{ form_row(formArticle.category)}}
-        {{ form_row(formArticle.contenu, {'attr': {'placeholder': "Contenu de l\'article"}}) }}
-        {{ form_row(formArticle.image, {'attr': {'placeholder': "Image de l\'article"}}) }}
+            {{ form_start(formArticle) }}
 
-    <button type="submit" class="btn btn-success">
-        {% if editMode %}
-        Editer
-        {% else %}
-        Ajouter
+            {{ form_row(formArticle.titre, {'attr': {'placeholder': "Titre de l\'article"}}) }}
+            {{ form_row(formArticle.category)}}
+            {{ form_row(formArticle.contenu, {'attr': {'placeholder': "Contenu de l\'article"}}) }}
+            {{ form_row(formArticle.image, {'attr': {'placeholder': "Image de l\'article"}}) }}
+
+            <button type="submit" class="btn btn-success">
+
+                {% if editMode %}
+                    Editer
+                {% else %}
+                    Ajouter
+                {% endif %}
+
+            </button>
+
+            {{ form_end(formArticle) }}
+
         {% endif %}
-    </button>
-
-    {{ form_end(formArticle) }}
+    {% endif %}
 
 {% endblock %}

@@ -155,7 +155,6 @@ class Article
                 $comment->setArticle(null);
             }
         }
-
         return $this;
     }
 }

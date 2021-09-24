@@ -30,7 +30,7 @@ class ArticleFixtures extends Fixture
 
                 $article->setTitre($faker->sentence())
                     ->setContenu($content)
-                    ->setImage($faker->imageUrl)
+                    ->setImage($faker->imageUrl(640,480,'https://loremflickr.com/640/360'))
                     ->setCreatedAt($faker->dateTimeBetween('-6 months'))
                     ->setCategory($category);
 

@@ -22,9 +22,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('blog') }}">Blog</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('blog_create') }}">Créer</a>
-                    </li>
+                    {% if app.user ? app.user.email %}
+                            {% if app.user.email is same as('admin@admin.admin') %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('blog_create') }}">Créer</a>
+                                </li>
+                            {% endif %}
+                    {% endif %}
                     {% if not app.user %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>

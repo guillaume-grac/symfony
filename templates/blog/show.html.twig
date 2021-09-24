@@ -5,12 +5,23 @@
 {% block title %}Blog | Article {{ article.id }}{% endblock %}
 
 {% block body %}
+
     <section>
+        {% if app.user ? app.user.email %}
+            {% if app.user.email is same as('admin@admin.admin') %}
+
+                <a href="{{ path('blog_edit', {'id': article.id}) }}"><button class="btn btn-success">Editer</button></a>
+                <a href="{{ path('blog_edit', {'id': article.id}) }}"><button type="submit" class="btn btn-danger">Supprimer</button></a>
+
+            {% endif %}
+        {% endif %}
+
         <h2>{{ article.titre }}</h2>
         <img src="{{ article.image }}">
         <p>Ecrit le {{ article.createdAt | date('d/m/y')}} dans la catégorie {{ article.category.titre }}</p>
         <p>{{ article.contenu | raw }}</p>
     </section>
+
     <section id="commentaires">
         <h1>{{ article.comments | length }} commentaires :</h1>
         {% for comment in article.comments %}

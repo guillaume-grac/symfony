@@ -28,7 +28,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\Email(message = "Vous devez rentrer une adresse mail.")
      */
-    private $email;
+    public $email;
 
     /**
      * @ORM\Column(type="string", length=255)
